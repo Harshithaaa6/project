@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Error explanotary system</title>
+    <style>
+        body {
+          margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: lightgrey;
+            text-align: center; /* centers all inline content */
+            
+        }
+.main-heading {
+            margin-top: 20px;
+            color: darkblue;
+        }
+        .form-container {
+            text-align: center;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+        }
+        input[type="text"] {
+            padding: 10px;
+            width: 250px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+        input[type="submit"] {
+            padding: 10px 20px;
+            border: none;
+            background-color: #007BFF;
+            color: green;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+ }
+        input[type="submit"]:hover {
+            background-color: white;
+        }
+    </style>
+</head>
+<body>
+<h1 class="main-heading">ERROR EXPLANATORY SYSTEM</h1>
+    <div class="form-container">
+        <h2>Enter error</h2>
+        <input type="text" id="errorInput" placeholder="Type here..." required><br>
+<button onclick="getError()">Get Explanation</button>
+<p id="result"></p>        </form>
+    </div>
+<script>
+function getError() {
+    let errorName = document.getElementById("errorInput").value;
+
+    fetch("api.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ error: errorName })
+    })
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById("result").innerText = data.result;
+    })
+    .catch(err => console.log(err));
+}
+</script>
+</body>
+</html>
